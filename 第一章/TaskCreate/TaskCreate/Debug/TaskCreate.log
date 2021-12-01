@@ -1,2 +1,5 @@
 ﻿  main.c
-  TaskCreate.vcxproj -> D:\FreeRTOS-Tutorial\FreeRTOS-Tutorial\第一章\TaskCreate\Debug\TaskCreate.exe
+D:\FreeRTOS-Tutorial\第一章\TaskCreate\TaskCreate\Application\source\main.c(102,9): warning C4474: printf: 格式字符串中传递的参数太多
+D:\FreeRTOS-Tutorial\第一章\TaskCreate\TaskCreate\Application\source\main.c(102,9): message : 占位符和其参数预计 1 可变参数，但提供的却是 3 参数
+D:\FreeRTOS-Tutorial\第一章\TaskCreate\TaskCreate\Application\source\main.c(181,23): warning C4101: “ul”: 未引用的局部变量
+  TaskCreate.vcxproj -> D:\FreeRTOS-Tutorial\第一章\TaskCreate\Debug\TaskCreate.exe

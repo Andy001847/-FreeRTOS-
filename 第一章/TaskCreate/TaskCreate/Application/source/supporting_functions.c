@@ -102,9 +102,9 @@
 
 void vApplicationMallocFailedHook( void )
 {
-    Log(FATAL, RED"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Malloc memory failed @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-    Log(FATAL, RED"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Malloc memory failed @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-    Log(FATAL, RED"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Malloc memory failed @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+    Log(FATAL, RED"@@@@@@@@@@ Malloc memory failed @@@@@@@@@@\n");
+    Log(FATAL, RED"@@@@@@@@@@ Malloc memory failed @@@@@@@@@@\n");
+    Log(FATAL, RED"@@@@@@@@@@ Malloc memory failed @@@@@@@@@@\n");
 
     /* vApplicationMallocFailedHook() will only be called if
     configUSE_MALLOC_FAILED_HOOK is set to 1 in FreeRTOSConfig.h.  It is a hook

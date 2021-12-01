@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\FreeRTOS-Tutorial\FreeRTOS-Tutorial\第一章\TaskCreate\Debug\TaskCreate.exe</FullPath>
+      <FullPath>D:\FreeRTOS-Tutorial\第一章\TaskCreate\Debug\TaskCreate.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
