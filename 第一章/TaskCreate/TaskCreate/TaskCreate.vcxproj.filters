@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="FreeRTOS">
+      <UniqueIdentifier>{c431ba8a-5f90-4c87-83ee-71ac722556f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\include">
+      <UniqueIdentifier>{0a85e3b0-c530-4d00-a060-cb193ec44b3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\source">
+      <UniqueIdentifier>{d67fa240-5e50-4d17-8002-ad48ea7bdece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeRTOS\include">
+      <UniqueIdentifier>{9ade1be9-6a08-4ee4-b264-53d8f7a141c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeRTOS\source">
+      <UniqueIdentifier>{e1bf2420-eb98-4065-9a63-186b67ed9e49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeRTOS\portable">
+      <UniqueIdentifier>{62af562c-80c7-4a18-a77e-f8a734c670a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeRTOS\portable\include">
+      <UniqueIdentifier>{bac2a8fd-016a-4b9f-a735-0ee6c9ba256d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeRTOS\portable\source">
+      <UniqueIdentifier>{4bdf3cd8-8fe5-4e0b-b139-6b55794a782f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application\source\main.c">
+      <Filter>Application\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\source\supporting_functions.c">
+      <Filter>Application\source</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeRTOS\source\event_groups.c">
+      <Filter>FreeRTOS\source</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeRTOS\source\list.c">
+      <Filter>FreeRTOS\source</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeRTOS\source\queue.c">
+      <Filter>FreeRTOS\source</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeRTOS\source\tasks.c">
+      <Filter>FreeRTOS\source</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeRTOS\source\timers.c">
+      <Filter>FreeRTOS\source</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeRTOS\portable\source\heap_4.c">
+      <Filter>FreeRTOS\portable\source</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeRTOS\portable\source\port.c">
+      <Filter>FreeRTOS\portable\source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application\include\FreeRTOSConfig.h">
+      <Filter>Application\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\include\supporting_functions.h">
+      <Filter>Application\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\croutine.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\deprecated_definitions.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\event_groups.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\FreeRTOS.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\list.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\mpu_wrappers.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\portable.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\projdefs.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\queue.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\semphr.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\StackMacros.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\task.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\include\timers.h">
+      <Filter>FreeRTOS\include</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\portable\include\portmacro.h">
+      <Filter>FreeRTOS\portable\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\include\common.h">
+      <Filter>Application\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
