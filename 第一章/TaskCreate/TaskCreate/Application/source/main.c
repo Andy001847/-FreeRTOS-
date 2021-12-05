@@ -53,60 +53,67 @@
     1 tab == 4 spaces!
 */
 
-/* FreeRTOS.org includes. */
+/* 包含FreeRTOS的头文件 */
 #include "FreeRTOS.h"
 #include "task.h"
-#include <stdio.h>
 
-/* Demo includes. */
+/* 包含需要支持的头文件 */
 #include "supporting_functions.h"
 #include "common.h"
 
-/* Used as a loop counter to create a very crude delay. */
-#define mainDELAY_LOOP_COUNT        ( 0xffffff )
-
-/* The task function. */
-void vTaskFunction(void* pvParameters);
-
-/* Define the strings that will be passed in as the task parameters.  These are
-defined const and off the stack to ensure they remain valid when the tasks are
-executing. */
-const char* pcTextForTask1 = "Task 1 is running\r\n";
-const char* pcTextForTask2 = "Task 2 is running\r\n";
+const char* pcTextForTask1 = "Task 1 is running\r\n";    /* 任务1参数 */
+const char* pcTextForTask2 = "Task 2 is running\r\n";    /* 任务1参数 */
 
 typedef struct
 {
     const char* name;
     uint8_t age;
-}person_t;
+} person_t;
 
-static void test_task_1(void* arg)
+/* 任务1和任务2共同的实现 */
+void vTask12(void* pvParameters)
 {
-    uint32_t value = (uint32_t)arg;
+    /* 获取任务创建时传递的参数 */
+    const char* pcTaskName = (char*)pvParameters;
+
+    /* 以下无线循环中的代码会一直执行，直到任务被销毁 */
+    while (1)
+    {
+        /* 打印出当前任务的名称 */
+        Log(DEBUG, WHITE"%s", pcTaskName);
+
+        /* 延时1秒 */
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+}
+
+static void vTask3(void* pvParameters)
+{
+    uint32_t value = (uint32_t)pvParameters;
 
     while (1)
     {
         Log(DEBUG, BLUE"value = %d\n", value);
 
-        /* Delay one second. */
+        /* 延时1秒 */
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
-static void test_task_2(void* arg)
+static void vTask4(void* pvParameters)
 {
-    person_t* p = (person_t*)arg;
+    person_t* p = (person_t*)pvParameters;
 
     while (1)
     {
         Log(DEBUG, MAGENTA"name: %s, age: %hhu\n", p->name, p->age);
 
-        /* Delay one second. */
+        /* 延时1秒 */
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
-static void test_task_3(void* arg)
+static void vTask5(void* pvParameters)
 {
     char* buffer = (char*)pvPortMalloc(4096);
 
@@ -114,7 +121,7 @@ static void test_task_3(void* arg)
     {
         Log(DEBUG, CYAN"test_task_3");
 
-        /* Delay one second. */
+        /* 延时1秒 */
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
@@ -123,74 +130,50 @@ static void test_task_3(void* arg)
 
 int main(void)
 {
-    /* Create one of the two tasks. */
-    xTaskCreate(vTaskFunction,          /* Pointer to the function that implements the task. */
-                "Task 1",               /* Text name for the task.  This is to facilitate debugging only. */
-                1000,                   /* Stack depth - most small microcontrollers will use much less stack than this. */
-                (void*)pcTextForTask1,  /* Pass the text to be printed in as the task parameter. */
-                1,                      /* This task will run at priority 1. */
-                NULL);                 /* We are not using the task handle. */
+    /* 创建任务1 */
+    xTaskCreate(vTask12,                /* 任务函数指针 */
+                "vTask1",               /* 任务函数名称 */
+                1000,                   /* 给任务函数分配的堆栈空间大小 */
+                (void*)pcTextForTask1,  /* 给任务函数传递的参数 */
+                1,                      /* 给任务函数分配的优先级 */
+                NULL);                  /* 任务函数的句柄，调用时可用 */
 
-    /* Create the other task in exactly the same way.  Note this time that we
-    are creating the SAME task, but passing in a different parameter.  We are
-    creating two instances of a single task implementation. */
-    xTaskCreate(vTaskFunction, "Task 2", 1000, (void*)pcTextForTask2, 1, NULL);
+    /* 创建任务2，实现和任务1相同 */
+    xTaskCreate(vTask12, "vTask2", 1000, (void*)pcTextForTask2, 1, NULL);
 
+    /* 传递无符号整数任务 */
     uint32_t value = 1024;
-    BaseType_t create_success = xTaskCreate(test_task_1, "test_task_1", 1000, (void*)value, 1, NULL);
+    BaseType_t create_success = xTaskCreate(vTask3, "vTask3", 1000, (void*)value, 1, NULL);
     if (create_success != pdPASS)
     {
-        Log(FATAL, RED"Create test_task_1 failed.");
+        Log(FATAL, RED"Create vTask3 failed.");
     }
 
-    person_t person =
+    /* 传递结构体任务 */
+    const person_t person =
     {
         .name = "Candy",
         .age = 18,
     };
-    create_success = xTaskCreate(test_task_2, "test_task_2", 1000, &person, 1, NULL);
+    create_success = xTaskCreate(vTask4, "vTask4", 1000, (void*)&person, 1, NULL);
     if (create_success != pdPASS)
     {
-        Log(FATAL, RED"Create test_task_2 failed.");
+        Log(FATAL, RED"Create vTask3 failed.");
     }
 
 #if 0
-    create_success = xTaskCreate(test_task_3, "test_task_3", 128, NULL, 1, NULL);
+    /* 测试创建任务失败情况 */
+    create_success = xTaskCreate(vTask5, "vTask5", 128, NULL, 1, NULL);
     if (create_success != pdPASS)
     {
-        Log(FATAL, RED"Create test_task_3 failed.");
+        Log(FATAL, RED"Create vTask5 failed.");
     }
 #endif
 
-    /* Start the scheduler to start the tasks executing. */
+    /* 启动调度器以启动所创建的任务. */
     vTaskStartScheduler();
-
-    /* The following line should never be reached because vTaskStartScheduler()
-    will only return if there was not enough FreeRTOS heap memory available to
-    create the Idle and (if configured) Timer tasks.  Heap management, and
-    techniques for trapping heap exhaustion, are described in the book text. */
-    while (1);
 
     return 0;
 }
 /*-----------------------------------------------------------*/
-
-void vTaskFunction(void* pvParameters)
-{
-    char* pcTaskName;
-
-    /* The string to print out is passed in via the parameter.  Cast this to a
-    character pointer. */
-    pcTaskName = (char*)pvParameters;
-
-    /* As per most tasks, this task is implemented in an infinite loop. */
-    while(1)
-    {
-        /* Print out the name of this task. */
-        Log(DEBUG, WHITE"%s", pcTaskName);
-
-        /* Delay one second. */
-        vTaskDelay(pdMS_TO_TICKS(1000));
-    }
-}
 
